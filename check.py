@@ -66,11 +66,11 @@ def day_info(raw, fallback_date):
 
 def describe(status, outs):
     if status == "EmergencyShutdowns":
-        return "⚠️ Экстренные отключения — графики не действуют"
+        return "⚠️ Екстрені відключення — графіки не діють"
     if status == "WaitingForSchedule":
-        return "⏳ График ещё не опубликован"
+        return "⏳ Графік ще не опубліковано"
     if not outs:
-        return "✅ Отключений нет"
+        return "✅ Відключень немає"
     return "\n".join(f"🔴 {hm(s)}–{hm(e)}" for s, e in outs)
 
 
@@ -102,10 +102,10 @@ def main():
         st["days"][d] = sig
         if old is None and status == "WaitingForSchedule":
             continue
-        when = "сегодня" if d == today.isoformat() else "завтра"
+        when = "сьогодні" if d == today.isoformat() else "завтра"
         first = old is None or old[0] == "WaitingForSchedule"
-        title = "📅 График" if first else "🔄 Изменения в графике"
-        msgs.append(f"{title} на {when} ({ddmm(d)}), очередь {GROUP}:\n{describe(status, outs)}")
+        title = "📅 Графік" if first else "🔄 Зміни в графіку"
+        msgs.append(f"{title} на {when} ({ddmm(d)}), черга {GROUP}:\n{describe(status, outs)}")
 
     # 2. Предупреждения перед отключением и о включении
     periods = []
@@ -127,13 +127,13 @@ def main():
         if s - timedelta(minutes=LEAD_MIN) <= now < e and k_off not in sent:
             if now < s:
                 mins = max(1, int((s - now).total_seconds() // 60))
-                msgs.append(f"⚠️ Через {mins} мин отключение света: {s:%H:%M}–{e:%H:%M}")
+                msgs.append(f"⚠️ Через {mins} хв відключення світла: {s:%H:%M}–{e:%H:%M}")
             else:
-                msgs.append(f"🔴 По графику сейчас света нет, включение в {e:%H:%M}")
+                msgs.append(f"🔴 За графіком зараз світла немає, увімкнення о {e:%H:%M}")
             sent.add(k_off)
         k_on = f"on-{e:%Y-%m-%dT%H:%M}"
         if e <= now < e + timedelta(minutes=60) and k_on not in sent:
-            msgs.append(f"🟢 По графику свет должен появиться ({e:%H:%M})")
+            msgs.append(f"🟢 За графіком світло має з’явитися ({e:%H:%M})")
             sent.add(k_on)
 
     for m in msgs:
