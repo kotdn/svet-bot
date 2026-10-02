@@ -1,0 +1,14 @@
+{
+ "days": {
+  "2026-10-02": [
+   "NoOutages",
+   []
+  ],
+  "2026-10-03": [
+   "WaitingForSchedule",
+   []
+  ]
+ },
+ "last_run_day": "2026-10-02",
+ "sent": []
+}
