@@ -138,6 +138,9 @@ def main():
 
     for m in msgs:
         send(m)
+    print(f"{now:%d.%m %H:%M} черга {GROUP}: "
+          + "; ".join(f"{ddmm(d)} {status} відключень {len(outs)}" for d, status, outs in infos)
+          + f" | надіслано повідомлень: {len(msgs)}")
 
     keep_from = (today - timedelta(days=1)).isoformat()
     st["days"] = {d: v for d, v in st["days"].items() if d >= keep_from}
