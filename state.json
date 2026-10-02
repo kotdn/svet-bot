@@ -5,10 +5,14 @@
    []
   ],
   "2026-10-03": [
+   "NoOutages",
+   []
+  ],
+  "2026-10-04": [
    "WaitingForSchedule",
    []
   ]
  },
- "last_run_day": "2026-10-02",
+ "last_run_day": "2026-10-03",
  "sent": []
 }
