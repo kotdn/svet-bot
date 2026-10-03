@@ -26,6 +26,8 @@ jobs:
           CHAT_ID: ${{ secrets.CHAT_ID }}
           GROUP: "6.1"
           LEAD_MIN: "30"
+          NIGHT_FROM: "23" 
+          NIGHT_TO: "8"
 
       - name: Сохранить состояние
         run: |
