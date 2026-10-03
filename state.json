@@ -1,15 +1,7 @@
 {
- "days": {
-  "2026-10-02": [
-   "NoOutages",
-   []
-  ],
+ "ann": {
   "2026-10-03": [
    "NoOutages",
-   []
-  ],
-  "2026-10-04": [
-   "WaitingForSchedule",
    []
   ]
  },
