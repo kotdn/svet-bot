@@ -28,6 +28,7 @@ jobs:
           LEAD_MIN: "30"
           NIGHT_FROM: "23" 
           NIGHT_TO: "8"
+          ON_LEAD_MIN: "10"
 
       - name: Сохранить состояние
         run: |
