@@ -8,7 +8,8 @@ from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
 
 GROUP = os.getenv("GROUP", "6.1")
-LEAD_MIN = int(os.getenv("LEAD_MIN", "30"))       # за скільки хвилин попереджати
+LEAD_MIN = int(os.getenv("LEAD_MIN", "30"))       # за скільки хвилин попереджати про відключення
+ON_LEAD_MIN = int(os.getenv("ON_LEAD_MIN", "5"))  # за скільки хвилин писати, що світло має з’явитися
 NIGHT_FROM = int(os.getenv("NIGHT_FROM", "22"))   # тиша з 22:00
 NIGHT_TO = int(os.getenv("NIGHT_TO", "8"))        # до 08:00
 BOT_TOKEN = os.environ["BOT_TOKEN"]
@@ -140,9 +141,13 @@ def main():
                 mins = max(1, int((s - now).total_seconds() // 60))
                 msgs.append(f"⚠️ Через {mins} хв відключення світла: {s:%H:%M}–{e:%H:%M}")
             sent.add(k_off)
-        if e <= now < e + timedelta(minutes=60) and k_on not in sent:
+        if e - timedelta(minutes=ON_LEAD_MIN) <= now < e + timedelta(minutes=60) and k_on not in sent:
             if not night:
-                msgs.append(f"🟢 За графіком світло має з’явитися ({e:%H:%M})")
+                if now < e:
+                    mins = max(1, -(-int((e - now).total_seconds()) // 60))
+                    msgs.append(f"🟢 Через {mins} хв за графіком світло має з’явитися ({e:%H:%M})")
+                else:
+                    msgs.append(f"🟢 За графіком світло має з’явитися ({e:%H:%M})")
             sent.add(k_on)
 
     for m in msgs:
