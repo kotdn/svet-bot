@@ -10,26 +10,12 @@
    ]
   ],
   "2026-10-07": [
-   "ScheduleApplies",
-   [
-    [
-     720,
-     930
-    ]
-   ]
+   "EmergencyShutdowns",
+   []
   ],
   "2026-10-08": [
-   "ScheduleApplies",
-   [
-    [
-     420,
-     570
-    ],
-    [
-     1260,
-     1440
-    ]
-   ]
+   "EmergencyShutdowns",
+   []
   ]
  },
  "last_run_day": "2026-10-07",
